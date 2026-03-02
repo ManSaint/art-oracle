@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art Oracle — Wireframe</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap');
+
+  :root {
+    --ink: #0e0d0b;
+    --parchment: #f2ede4;
+    --warm: #c9b99a;
+    --accent: #8b4e2a;
+    --muted: #7a7265;
+    --gold: #c8a96e;
+    --wire: #d4cfc7;
+    --box: #e8e2d8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1814;
+    font-family: 'DM Mono', monospace;
+    color: var(--parchment);
+    padding: 40px 20px;
+  }
+
+  /* ── HEADER ── */
+  .doc-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .doc-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-bottom: 8px;
+  }
+  .doc-header p {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+  }
+
+  /* ── SCREEN WRAPPER ── */
+  .screen {
+    max-width: 900px;
+    margin: 0 auto 80px;
+    border: 1px solid #2e2b26;
+  }
+
+  .screen-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    border-bottom: 1px solid #2e2b26;
+    background: #141310;
+  }
+  .screen-label span {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .screen-label .route {
+    color: var(--gold);
+    margin-left: auto;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot.r { background: #c0392b; }
+  .dot.y { background: #e67e22; }
+  .dot.g { background: #27ae60; }
+
+  /* ── WIREFRAME CANVAS ── */
+  .canvas {
+    background: var(--parchment);
+    color: var(--ink);
+    min-height: 600px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── NAV ── */
+  .wf-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    border-bottom: 1px solid var(--wire);
+  }
+  .wf-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+  }
+  .wf-logo em { font-style: italic; font-weight: 300; color: var(--accent); }
+  .wf-nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .wf-nav-links li {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .wf-nav-links li.active { color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+  .wf-search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--wire);
+    padding: 6px 12px;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    width: 160px;
+  }
+
+  /* ── HERO ── */
+  .wf-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 440px;
+  }
+  .wf-hero-image {
+    background: linear-gradient(135deg, var(--box) 0%, var(--wire) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .wf-hero-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 8px,
+      rgba(0,0,0,0.03) 8px,
+      rgba(0,0,0,0.03) 9px
+    );
+  }
+  .img-placeholder {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .img-placeholder .big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    display: block;
+    color: var(--warm);
+    opacity: 0.4;
+    margin-bottom: 8px;
+  }
+  .wf-hero-content {
+    padding: 60px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--parchment);
+  }
+  .wf-eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .wf-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .wf-hero-title em { font-style: italic; }
+  .wf-hero-sub {
+    font-size: 9px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 36px;
+    max-width: 280px;
+  }
+  .wf-cta {
+    display: inline-flex;
+    gap: 16px;
+  }
+  .wf-btn {
+    padding: 10px 22px;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--parchment);
+    cursor: pointer;
+  }
+  .wf-btn.ghost { background: transparent; color: var(--ink); }
+
+  /* ── SECTION LABEL ── */
+  .wf-section {
+    padding: 48px 40px;
+    border-top: 1px solid var(--wire);
+  }
+  .wf-section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+  .wf-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--ink);
+  }
+  .wf-section-link {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /* ── ART GRID ── */
+  .wf-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .wf-art-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .wf-art-card:hover .wf-card-img { border-color: var(--warm); }
+  .wf-card-img {
+    background: var(--box);
+    border: 1px solid var(--wire);
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .wf-card-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 6px,
+      rgba(0,0,0,0.025) 6px,
+      rgba(0,0,0,0.025) 7px
+    );
+  }
+  .wf-card-img span { font-size: 8px; color: var(--warm); opacity: 0.5; position: relative; z-index: 1; }
+  .wf-card-title { font-size: 9px; color: var(--ink); font-weight: 400; }
+  .wf-card-artist { font-size: 8px; color: var(--muted); font-style: italic; }
+
+  /* ── DEPARTMENTS ── */
+  .wf-dept-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+  .wf-dept-chip {
+    padding: 8px 6px;
+    border: 1px solid var(--wire);
+    font-size: 8px;
+    text-align: center;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    line-height: 1.4;
+  }
+  .wf-dept-chip:hover { border-color: var(--warm); color: var(--ink); }
+
+  /* ── FOOTER ── */
+  .wf-footer {
+    padding: 24px 40px;
+    border-top: 1px solid var(--wire);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f7f3ec;
+  }
+  .wf-footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .wf-footer-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+  .wf-footer-links li { font-size: 8px; color: var(--muted); letter-spacing: 0.1em; }
+
+  /* ─────────────────────────────── */
+  /* PAGE 2: ARTWORK DETAIL          */
+  /* ─────────────────────────────── */
+
+  .wf-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    min-height: 700px;
+  }
+  .wf-detail-image-col {
+    background: #1a1814;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    position: relative;
+  }
+  .wf-detail-frame {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 3/4;
+    background: #2a2722;
+    border: 1px solid #3a3630;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .wf-detail-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255,255,255,0.015) 10px,
+      rgba(255,255,255,0.015) 11px
+    );
+  }
+  .wf-detail-frame span {
+    font-size: 8px;
+    color: #4a4640;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    line-height: 2;
+  }
+  .wf-zoom-hint {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 7px;
+    color: #4a4640;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .wf-detail-panel {
+    background: var(--parchment);
+    padding: 40px 36px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    border-left: 1px solid var(--wire);
+  }
+  .wf-detail-dept {
+    font-size: 8px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .wf-detail-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .wf-detail-artist {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .wf-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 20px 0;
+    border-top: 1px solid var(--wire);
+    border-bottom: 1px solid var(--wire);
+  }
+  .wf-meta-item label {
+    display: block;
+    font-size: 7px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .wf-meta-item span {
+    font-size: 10px;
+    color: var(--ink);
+  }
+
+  .wf-ai-box {
+    border: 1px solid var(--wire);
+    padding: 20px;
+    background: white;
+  }
+  .wf-ai-box-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .wf-ai-label {
+    font-size: 7px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .wf-ai-icon {
+    font-size: 8px;
+    color: var(--muted);
+    border: 1px solid var(--wire);
+    padding: 3px 8px;
+  }
+  .wf-ai-text-lines { display: flex; flex-direction: column; gap: 5px; }
+  .wf-line {
+    height: 8px;
+    background: var(--box);
+    border-radius: 1px;
+  }
+  .wf-line.short { width: 65%; }
+  .wf-line.shorter { width: 45%; }
+
+  .wf-audio-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border: 1px solid var(--wire);
+    background: var(--ink);
+  }
+  .wf-play-btn {
+    width: 28px;
+    height: 28px;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .wf-waveform {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 24px;
+  }
+  .wf-bar {
+    width: 2px;
+    background: #3a3630;
+    border-radius: 1px;
+  }
+  .wf-bar.active { background: var(--gold); }
+  .wf-audio-time { font-size: 8px; color: #4a4640; }
+
+  .wf-fav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--wire);
+    padding: 10px 16px;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    background: none;
+    font-family: 'DM Mono', monospace;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ─────────────────────────────── */
+  /* PAGE 3: SEARCH                  */
+  /* ─────────────────────────────── */
+  .wf-search-hero {
+    padding: 48px 40px 32px;
+    border-bottom: 1px solid var(--wire);
+  }
+  .wf-search-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .wf-search-input-row {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--ink);
+    overflow: hidden;
+  }
+  .wf-search-field {
+    flex: 1;
+    padding: 14px 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    background: white;
+    border: none;
+  }
+  .wf-search-submit {
+    padding: 14px 24px;
+    background: var(--ink);
+    color: var(--parchment);
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    border: none;
+    cursor: pointer;
+  }
+  .wf-filters-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .wf-filter-chip {
+    padding: 5px 12px;
+    border: 1px solid var(--wire);
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    cursor: pointer;
+  }
+  .wf-filter-chip.on { border-color: var(--ink); color: var(--ink); background: rgba(14,13,11,0.05); }
+
+  .wf-results-meta {
+    padding: 16px 40px;
+    border-bottom: 1px solid var(--wire);
+    font-size: 9px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .wf-results-meta strong { color: var(--ink); }
+  .wf-sort-select {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    color: var(--muted);
+    border: 1px solid var(--wire);
+    padding: 4px 8px;
+    background: none;
+  }
+  .wf-search-results {
+    padding: 28px 40px;
+  }
+  .wf-search-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+  }
+  .wf-search-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+  }
+  .wf-search-img {
+    aspect-ratio: 1;
+    background: var(--box);
+    border: 1px solid var(--wire);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .wf-search-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 5px,
+      rgba(0,0,0,0.025) 5px,
+      rgba(0,0,0,0.025) 6px
+    );
+  }
+  .wf-search-img span { font-size: 7px; color: var(--warm); opacity: 0.4; position: relative; z-index: 1; }
+  .wf-search-card-title { font-size: 8px; color: var(--ink); }
+  .wf-search-card-info { font-size: 7px; color: var(--muted); }
+
+  /* ── ANNOTATION SYSTEM ── */
+  .annotations {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ann {
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border: 1px solid #2e2b26;
+    background: #141310;
+  }
+  .ann span { color: var(--gold); margin-right: 6px; }
+
+  /* ── PAGE DIVIDERS ── */
+  .page-divider {
+    max-width: 900px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .page-divider h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--warm);
+    white-space: nowrap;
+  }
+  .page-divider-line {
+    flex: 1;
+    height: 1px;
+    background: #2e2b26;
+  }
+  .page-num {
+    font-size: 8px;
+    color: #3a3630;
+    letter-spacing: 0.2em;
+  }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <h1>Art Oracle — Wireframe & Designskiss</h1>
+  <p>Individuellt Arbete · Lexicon Frontend System Development · 2026</p>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 1: HOME                           -->
+<!-- ═══════════════════════════════════════ -->
+
+<div class="page-divider">
+  <h2>Sida 1 — Startsida</h2>
+  <div class="page-divider-line"></div>
+  <span class="page-num">/ (root)</span>
+</div>
+
+<div class="screen">
+  <div class="screen-label">
+    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+    <span>Startsida</span>
+    <span class="route">localhost:3000/</span>
+  </div>
+  <div class="canvas">
+
+    <!-- NAV -->
+    <nav class="wf-nav">
+      <div class="wf-logo">Art <em>Oracle</em></div>
+      <ul class="wf-nav-links">
+        <li class="active">Hem</li>
+        <li>Utforska</li>
+        <li>Avdelningar</li>
+        <li>Favoriter</li>
+      </ul>
+      <div class="wf-search-box">
+        ⌕ &nbsp; Sök konstverk...
+      </div>
+    </nav>
+
+    <!-- HERO: Dagens konstverk -->
+    <div class="wf-hero">
+      <div class="wf-hero-image">
+        <div class="img-placeholder">
+          <span>🖼</span>
+          Konstverksbild<br>met-api.jpg
+        </div>
+      </div>
+      <div class="wf-hero-content">
+        <div class="wf-eyebrow">✦ Dagens konstverk</div>
+        <h1 class="wf-hero-title">Wheat Field<br><em>with Crows</em></h1>
+        <p class="wf-hero-sub">Vincent van Gogh · 1890<br>Oil on canvas · Dutch Post-Impressionism<br>The Metropolitan Museum of Art</p>
+        <div class="wf-cta">
+          <button class="wf-btn">Utforska verket</button>
+          <button class="wf-btn ghost">▶ Lyssna</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED ARTWORKS -->
+    <div class="wf-section">
+      <div class="wf-section-header">
+        <h2 class="wf-section-title">Utvalda konstverk</h2>
+        <span class="wf-section-link">Visa alla →</span>
+      </div>
+      <div class="wf-grid">
+        <div class="wf-art-card">
+          <div class="wf-card-img"><span>🖼</span></div>
+          <div class="wf-card-title">The Birth of Venus</div>
+          <div class="wf-card-artist">Botticelli, c. 1484</div>
+        </div>
+        <div class="wf-art-card">
+          <div class="wf-card-img"><span>🖼</span></div>
+          <div class="wf-card-title">Water Lilies</div>
+          <div class="wf-card-artist">Monet, 1906</div>
+        </div>
+        <div class="wf-art-card">
+          <div class="wf-card-img"><span>🖼</span></div>
+          <div class="wf-card-title">The Night Watch</div>
+          <div class="wf-card-artist">Rembrandt, 1642</div>
+        </div>
+        <div class="wf-art-card">
+          <div class="wf-card-img"><span>🖼</span></div>
+          <div class="wf-card-title">Girl with a Pearl</div>
+          <div class="wf-card-artist">Vermeer, c. 1665</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEPARTMENTS -->
+    <div class="wf-section">
+      <div class="wf-section-header">
+        <h2 class="wf-section-title">Avdelningar</h2>
+        <span class="wf-section-link">Alla 17 →</span>
+      </div>
+      <div class="wf-dept-grid">
+        <div class="wf-dept-chip">Europeisk<br>måleri</div>
+        <div class="wf-dept-chip">Egyptisk<br>konst</div>
+        <div class="wf-dept-chip">Grekisk &<br>Romersk</div>
+        <div class="wf-dept-chip">Asiatisk<br>konst</div>
+        <div class="wf-dept-chip">Modern<br>konst</div>
+        <div class="wf-dept-chip">Afrikansk<br>konst</div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="wf-footer">
+      <div class="wf-footer-logo">Art Oracle</div>
+      <ul class="wf-footer-links">
+        <li>© The Metropolitan Museum of Art</li>
+        <li>API: collectionapi.metmuseum.org</li>
+        <li>AI: Grok by xAI</li>
+      </ul>
+    </footer>
+  </div>
+</div>
+
+<div class="annotations">
+  <div class="ann"><span>A</span>Server Component — hämtar konstverk med Next.js fetch + cache</div>
+  <div class="ann"><span>B</span>Dagens konstverk — deterministisk ID baserat på datum</div>
+  <div class="ann"><span>C</span>▶ Lyssna — triggar Web Speech API (dev) / ElevenLabs (prod)</div>
+  <div class="ann"><span>D</span>Grid — 4 kolumner desktop, 2 tablet, 1 mobil</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 2: ARTWORK DETAIL                 -->
+<!-- ═══════════════════════════════════════ -->
+
+<div class="page-divider">
+  <h2>Sida 2 — Konstverks-detaljsida</h2>
+  <div class="page-divider-line"></div>
+  <span class="page-num">/artwork/[id]</span>
+</div>
+
+<div class="screen">
+  <div class="screen-label">
+    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+    <span>Detaljsida</span>
+    <span class="route">localhost:3000/artwork/436535</span>
+  </div>
+  <div class="canvas">
+
+    <!-- NAV (dark for detail page) -->
+    <nav class="wf-nav" style="background:#0e0d0b; border-color:#2e2b26;">
+      <div class="wf-logo" style="color:var(--parchment)">Art <em>Oracle</em></div>
+      <ul class="wf-nav-links" style="color:var(--muted)">
+        <li style="color:#5a5650">Hem</li>
+        <li style="color:#5a5650">Utforska</li>
+        <li style="color:#5a5650">Avdelningar</li>
+        <li style="color:#5a5650">Favoriter</li>
+      </ul>
+      <div class="wf-search-box" style="border-color:#2e2b26; color:#4a4640">
+        ⌕ &nbsp; Sök konstverk...
+      </div>
+    </nav>
+
+    <!-- MAIN LAYOUT -->
+    <div class="wf-detail-layout">
+      <!-- Left: big image on dark bg -->
+      <div class="wf-detail-image-col">
+        <div class="wf-detail-frame">
+          <span>Konstverksbild<br>470k+ tillgängliga<br>via Met Museum API</span>
+        </div>
+        <div class="wf-zoom-hint">⤢ Zooma</div>
+      </div>
+
+      <!-- Right: metadata panel -->
+      <div class="wf-detail-panel">
+        <div>
+          <div class="wf-detail-dept">Europeisk måleri · Impressionism</div>
+          <h1 class="wf-detail-title" style="margin:8px 0">Wheat Field<br>with Crows</h1>
+          <div class="wf-detail-artist">Vincent van Gogh</div>
+        </div>
+
+        <!-- Metadata grid -->
+        <div class="wf-meta-grid">
+          <div class="wf-meta-item">
+            <label>År</label>
+            <span>1890</span>
+          </div>
+          <div class="wf-meta-item">
+            <label>Medium</label>
+            <span>Oil on canvas</span>
+          </div>
+          <div class="wf-meta-item">
+            <label>Kultur</label>
+            <span>Dutch</span>
+          </div>
+          <div class="wf-meta-item">
+            <label>Mått</label>
+            <span>50.5 × 103 cm</span>
+          </div>
+          <div class="wf-meta-item">
+            <label>Avdelning</label>
+            <span>European Paintings</span>
+          </div>
+          <div class="wf-meta-item">
+            <label>Object ID</label>
+            <span style="color:var(--muted)">#436535</span>
+          </div>
+        </div>
+
+        <!-- AI Description -->
+        <div class="wf-ai-box">
+          <div class="wf-ai-box-header">
+            <div class="wf-ai-label">✦ AI-Museiguide · Grok</div>
+            <div class="wf-ai-icon">Generera →</div>
+          </div>
+          <div class="wf-ai-text-lines">
+            <div class="wf-line"></div>
+            <div class="wf-line"></div>
+            <div class="wf-line short"></div>
+            <div class="wf-line"></div>
+            <div class="wf-line shorter"></div>
+          </div>
+        </div>
+
+        <!-- Audio player -->
+        <div class="wf-audio-bar">
+          <div class="wf-play-btn">▶</div>
+          <div class="wf-waveform">
+            <div class="wf-bar active" style="height:60%"></div>
+            <div class="wf-bar active" style="height:80%"></div>
+            <div class="wf-bar active" style="height:50%"></div>
+            <div class="wf-bar active" style="height:90%"></div>
+            <div class="wf-bar active" style="height:65%"></div>
+            <div class="wf-bar" style="height:40%"></div>
+            <div class="wf-bar" style="height:70%"></div>
+            <div class="wf-bar" style="height:55%"></div>
+            <div class="wf-bar" style="height:85%"></div>
+            <div class="wf-bar" style="height:45%"></div>
+            <div class="wf-bar" style="height:60%"></div>
+            <div class="wf-bar" style="height:75%"></div>
+            <div class="wf-bar" style="height:50%"></div>
+            <div class="wf-bar" style="height:80%"></div>
+            <div class="wf-bar" style="height:40%"></div>
+            <div class="wf-bar" style="height:65%"></div>
+            <div class="wf-bar" style="height:70%"></div>
+            <div class="wf-bar" style="height:55%"></div>
+            <div class="wf-bar" style="height:85%"></div>
+            <div class="wf-bar" style="height:48%"></div>
+          </div>
+          <div class="wf-audio-time">0:47 / 2:12</div>
+        </div>
+
+        <!-- Favorite -->
+        <button class="wf-fav-btn">♡ &nbsp; Spara som favorit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="annotations">
+  <div class="ann"><span>A</span>Mörk bakgrund — kontrast för konstverkets färger</div>
+  <div class="ann"><span>B</span>AI-box — anrop till /api/grok Route Handler (döljer API-nyckel)</div>
+  <div class="ann"><span>C</span>Ljudspelaren — ElevenLabs George-röst, cachad i Map</div>
+  <div class="ann"><span>D</span>Favorit — sparas i localStorage</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 3: SEARCH                         -->
+<!-- ═══════════════════════════════════════ -->
+
+<div class="page-divider">
+  <h2>Sida 3 — Söksida</h2>
+  <div class="page-divider-line"></div>
+  <span class="page-num">/search?q=monet</span>
+</div>
+
+<div class="screen">
+  <div class="screen-label">
+    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+    <span>Söksida</span>
+    <span class="route">localhost:3000/search?q=monet</span>
+  </div>
+  <div class="canvas">
+
+    <nav class="wf-nav">
+      <div class="wf-logo">Art <em>Oracle</em></div>
+      <ul class="wf-nav-links">
+        <li>Hem</li>
+        <li class="active">Utforska</li>
+        <li>Avdelningar</li>
+        <li>Favoriter</li>
+      </ul>
+      <div class="wf-search-box">⌕ &nbsp; monet</div>
+    </nav>
+
+    <!-- Search header -->
+    <div class="wf-search-hero">
+      <h1 class="wf-search-big">Sök bland 470 000+ konstverk</h1>
+      <div class="wf-search-input-row">
+        <div class="wf-search-field">monet</div>
+        <button class="wf-search-submit">Sök</button>
+      </div>
+      <div class="wf-filters-row">
+        <div class="wf-filter-chip on">Alla</div>
+        <div class="wf-filter-chip">Måleri</div>
+        <div class="wf-filter-chip">Skulptur</div>
+        <div class="wf-filter-chip">Fotografi</div>
+        <div class="wf-filter-chip">Europeisk konst</div>
+        <div class="wf-filter-chip">1800-tal</div>
+        <div class="wf-filter-chip">Franskt</div>
+        <div class="wf-filter-chip">Har bild ✓</div>
+      </div>
+    </div>
+
+    <!-- Results meta bar -->
+    <div class="wf-results-meta">
+      <span><strong>247 resultat</strong> för "monet"</span>
+      <select class="wf-sort-select">
+        <option>Sortera: Relevans</option>
+      </select>
+    </div>
+
+    <!-- Results grid -->
+    <div class="wf-search-results">
+      <div class="wf-search-grid">
+        <div class="wf-search-card">
+          <div class="wf-search-img"><span>🖼</span></div>
+          <div class="wf-search-card-title">Water Lilies</div>
+          <div class="wf-search-card-info">Monet · 1906</div>
+        </div>
+        <div class="wf-search-card">
+          <div class="wf-search-img"><span>🖼</span></div>
+          <div class="wf-search-card-title">Haystacks</div>
+          <div class="wf-search-card-info">Monet · 1891</div>
+        </div>
+        <div class="wf-search-card">
+          <div class="wf-search-img"><span>🖼</span></div>
+          <div class="wf-search-card-title">Rouen Cathedral</div>
+          <div class="wf-search-card-info">Monet · 1894</div>
+        </div>
+        <div class="wf-search-card">
+          <div class="wf-search-img"><span>🖼</span></div>
+          <div class="wf-search-card-title">Le Jardin</div>
+          <div class="wf-search-card-info">Monet · 1900</div>
+        </div>
+        <div class="wf-search-card">
+          <div class="wf-search-img"><span>🖼</span></div>
+          <div class="wf-search-card-title">Impression, Sunrise</div>
+          <div class="wf-search-card-info">Monet · 1872</div>
+        </div>
+        <div class="wf-search-card">
+          <div class="wf-search-img"><span>🖼</span></div>
+          <div class="wf-search-card-title">Argenteuil</div>
+          <div class="wf-search-card-info">Monet · 1875</div>
+        </div>
+        <div class="wf-search-card">
+          <div class="wf-search-img"><span>🖼</span></div>
+          <div class="wf-search-card-title">The Cliffs</div>
+          <div class="wf-search-card-info">Monet · 1885</div>
+        </div>
+        <div class="wf-search-card">
+          <div class="wf-search-img"><span>🖼</span></div>
+          <div class="wf-search-card-title">Charing Cross Bridge</div>
+          <div class="wf-search-card-info">Monet · 1903</div>
+        </div>
+        <div class="wf-search-card">
+          <div class="wf-search-img"><span>🖼</span></div>
+          <div class="wf-search-card-title">Poplars</div>
+          <div class="wf-search-card-info">Monet · 1891</div>
+        </div>
+        <div class="wf-search-card">
+          <div class="wf-search-img"><span>🖼</span></div>
+          <div class="wf-search-card-title">Venice, Twilight</div>
+          <div class="wf-search-card-info">Monet · 1908</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="wf-footer">
+      <div class="wf-footer-logo">Art Oracle</div>
+      <ul class="wf-footer-links">
+        <li>© The Metropolitan Museum of Art</li>
+        <li>API: collectionapi.metmuseum.org</li>
+      </ul>
+    </footer>
+  </div>
+</div>
+
+<div class="annotations">
+  <div class="ann"><span>A</span>Sökning — GET /search?q= via Met Museum API</div>
+  <div class="ann"><span>B</span>Filter — hasImages=true skickas alltid, övriga är klientsidefilter</div>
+  <div class="ann"><span>C</span>Grid — 5 kolumner desktop, 3 tablet, 2 mobil</div>
+  <div class="ann"><span>D</span>Skelettskärmar visas under laddning</div>
+</div>
+
+</body>
+</html>
