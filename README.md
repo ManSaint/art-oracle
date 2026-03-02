@@ -113,6 +113,14 @@ Anropas via `/api/tts`. Faller tillbaka på Web Speech API om nyckeln saknas.
 
 ---
 
+## 🎨 Designskiss
+
+Interaktiv wireframe med tre sidor — startsida, konstverks-detaljsida och söksida.
+
+**[→ Visa wireframe live](https://mansaint.github.io/art-oracle/wireframe.html)**
+
+---
+
 ## 📚 Kurs
 
 Individuellt arbete — [Lexicon Frontend System Development 2025–2026](https://github.com/Lexicon-Utbildning-Front-end-2025-2026/individuellt-arbete)
