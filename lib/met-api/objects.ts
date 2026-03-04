@@ -1,6 +1,6 @@
 import { metFetch, metFetchOptional, MetApiError } from "./client";
-import { MetObject, MetObjectsResponse } from "./types";
 import { searchArtworks } from "./search";
+import { MetObject, MetObjectsResponse } from "./types";
 
 export async function getObject(id: number): Promise<MetObject | null> {
   return metFetchOptional<MetObject>(`/objects/${id}`);
