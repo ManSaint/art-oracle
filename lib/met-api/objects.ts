@@ -10,6 +10,8 @@ export async function getAllObjectIds(): Promise<MetObjectsResponse> {
   return metFetch<MetObjectsResponse>("/objects");
 }
 
+// Turns today's date into a number like 20260304, then uses it to pick
+// the same artwork for everyone on the same day.
 export async function getDailyArtwork(): Promise<MetObject> {
   const today = new Date();
   const dateNumber = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
@@ -23,6 +25,8 @@ export async function getDailyArtwork(): Promise<MetObject> {
   const ids = results.objectIDs ?? [];
   const index = dateNumber % ids.length;
 
+  // Some artworks return 404 even when listed as available.
+  // We try up to 5 nearby artworks before giving up.
   for (let i = 0; i < 5; i++) {
     const artwork = await getObject(ids[(index + i) % ids.length]);
     if (artwork) return artwork;

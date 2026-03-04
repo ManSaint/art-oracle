@@ -17,6 +17,7 @@ function toArtworkSummary(obj: MetObject): ArtworkSummary {
   };
 }
 
+// E.g. page 3 with pageSize 10 starts at index 20 (skip the first 20 items).
 function paginateIds(ids: number[], page: number, pageSize: number) {
   const totalPages = Math.ceil(ids.length / pageSize);
   const start = (page - 1) * pageSize;
@@ -24,6 +25,8 @@ function paginateIds(ids: number[], page: number, pageSize: number) {
   return { pageIds, totalPages };
 }
 
+// .filter() removes the nulls, but TypeScript doesn't realise that automatically.
+// The "r is MetObject" part tells TypeScript: trust me, there are no nulls left.
 export async function fetchPage(ids: number[], page: number, pageSize = 10): Promise<PaginatedResult<ArtworkSummary>> {
   const safeIds = ids.slice(0, DEV_LIMIT);
   const { pageIds, totalPages } = paginateIds(safeIds, page, pageSize);

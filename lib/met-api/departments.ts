@@ -6,6 +6,8 @@ export async function getDepartments(): Promise<MetDepartment[]> {
   return res.departments;
 }
 
+// The Met only has 19 departments, so we just fetch all of them
+// and find the right one locally instead of making a separate API call.
 export async function getDepartment(id: number): Promise<MetDepartment | null> {
   const match = (await getDepartments()).find((dept) => dept.departmentId === id);
   return match ?? null;

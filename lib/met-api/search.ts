@@ -30,6 +30,8 @@ export async function searchArtworks(params: SearchParams): Promise<MetSearchRes
   if (params.medium !== undefined) query.set("medium", params.medium);
   if (params.hasImages !== undefined) query.set("hasImages", String(params.hasImages));
   if (params.geoLocation !== undefined) query.set("geoLocation", params.geoLocation);
+  // The Met API requires both dateBegin and dateEnd together — one without
+  // the other is ignored, so we only add them if both are provided.
   if (params.dateBegin !== undefined && params.dateEnd !== undefined) {
     query.set("dateBegin", String(params.dateBegin));
     query.set("dateEnd", String(params.dateEnd));
