@@ -39,23 +39,6 @@ export async function metFetchOptional<T>(path: string): Promise<T | null> {
   return res.json() as Promise<T>;
 }
 
-export async function batchFetch<T>(
-  ids: number[],
-  fetcher: (id: number) => Promise<T | null>,
-  concurrency = 10,
-): Promise<(T | null)[]> {
-  const results: (T | null)[] = new Array(ids.length);
-  let cursor = 0;
-
-  async function worker() {
-    while (cursor < ids.length) {
-      const index = cursor++;
-      results[index] = await fetcher(ids[index]);
-    }
-  }
-
-  const workers = Array.from({ length: concurrency }, () => worker());
-  await Promise.all(workers);
-
-  return results;
+export async function batchFetch<T>(ids: number[], fetcher: (id: number) => Promise<T | null>): Promise<(T | null)[]> {
+  return Promise.all(ids.map((id) => fetcher(id)));
 }
