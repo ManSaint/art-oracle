@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <header className="border-b border-[var(--color-border)]">
-      <div className="flex items-center justify-between px-10 py-[18px] max-w-[1200px] mx-auto">
+      <div className="flex items-center justify-between px-10 py-[18px]">
         {/* Logo */}
         <Link
           href="/"
