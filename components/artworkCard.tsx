@@ -8,7 +8,7 @@ export default function ArtworkCard({ artwork }: { artwork: ArtworkSummary }) {
       href={`/artwork/${artwork.objectID}`}
       className="block"
     >
-      <div className="relative aspect-[4/5] bg-[var(--color-border)] overflow-hidden">
+      <div className="relative aspect-[4/5] bg-[var(--color-border)] overflow-hidden border border-(--color-border)">
         {artwork.primaryImageSmall ? (
           <Image
             src={artwork.primaryImageSmall}
