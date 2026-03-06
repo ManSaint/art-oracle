@@ -9,7 +9,7 @@ export default function ArtworkCard({ artwork }: { artwork: ArtworkSummary }) {
       className="block"
     >
       <div className="relative aspect-[4/5] bg-[var(--color-border)] overflow-hidden border border-(--color-border)">
-        {artwork.primaryImageSmall ? (
+        {artwork.primaryImageSmall && artwork.isPublicDomain ? (
           <Image
             src={artwork.primaryImageSmall}
             alt={artwork.title}
