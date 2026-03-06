@@ -3,7 +3,8 @@
 :root {
   --color-background: #f5f2ed;
   --color-foreground: #1a1a18;
-  --color-border: #e0dbd3;
+  --color-hero-img-bg: #e0dbd3;
+  --color-border: #c7c7c7;
   --color-accent: #c4986a;
   --color-muted: #7a7265;
   --color-canvas: #e8e4dc;
