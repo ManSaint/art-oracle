@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getObject } from "@/lib/met-api";
-import ArtworkDetailImage from "@/components/artworkDetailImage";
-import ArtworkMetadata from "@/components/artworkMetadata";
+import ArtworkDetailImage from "@/components/artwork/artworkDetailImage";
+import ArtworkMetadata from "@/components/artwork/artworkMetadata";
 
 type Props = {
   params: Promise<{ id: string }>;
