@@ -19,7 +19,7 @@ export default function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="font-serif text-[22px] font-semibold tracking-[0.1em]"
+          className="font-serif text-[25px] font-semibold tracking-[0.1em]"
         >
           <span>Art </span>
           <span className="italic font-light text-accent">Oracle</span>
@@ -33,7 +33,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-[9px] tracking-[0.25em] uppercase ${isActive ? "text-[var(--color-foreground)] border-b border-[var(--color-foreground)] pb-0.5" : "text-muted hover:text-[var(--color-foreground)]"}`}
+                className={`text-[10px] tracking-[0.25em] uppercase ${isActive ? "text-[var(--color-foreground)] border-b border-[var(--color-foreground)] pb-0.5" : "text-muted hover:text-[var(--color-foreground)]"}`}
               >
                 {link.label}
               </Link>
@@ -42,12 +42,12 @@ export default function Header() {
         </nav>
 
         {/* Search */}
-        <div className="flex items-center border border-[var(--color-border)] px-3 py-1.5 gap-2 w-[160px] text-[9px] text-muted">
+        <div className="flex items-center border border-[var(--color-border)] px-3 py-1.5 gap-2 w-[160px] text-[12px] text-muted">
           <span>⌕</span>
           <input
             type="text"
             placeholder="Search artworks..."
-            className="bg-transparent outline-none w-full text-[9px]"
+            className="bg-transparent outline-none w-full text-[10px]"
           />
         </div>
       </div>

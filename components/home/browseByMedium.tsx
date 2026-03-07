@@ -14,10 +14,10 @@ export default function BrowseByMedium() {
     <section className="border-t border-(--color-border)">
       <div className="py-16 px-10 max-w-7xl mx-auto">
         <div className="flex items-baseline justify-between mb-8">
-          <h2 className="font-serif text-2xl font-light">Explore by Medium</h2>
+          <h2 className="font-serif text-3xl font-light">Explore by Medium</h2>
           <Link
             href="/search"
-            className="text-[9px] tracking-widest uppercase text-muted hover:text-foreground transition-colors"
+            className="text-[12px] tracking-widest uppercase text-muted hover:text-foreground transition-colors"
           >
             All works →
           </Link>
@@ -27,7 +27,7 @@ export default function BrowseByMedium() {
             <Link
               key={medium.label}
               href={medium.href}
-              className="border border-(--color-border) px-4 py-5 text-center text-base font-serif hover:bg-(--color-border) transition-colors"
+              className="border border-(--color-border) px-4 py-5 text-center text-[18px] font-serif hover:bg-(--color-border) transition-colors"
             >
               {medium.label}
             </Link>
