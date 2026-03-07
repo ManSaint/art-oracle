@@ -25,7 +25,7 @@ export default function DailyArtworkCard({ artwork }: Props) {
         )}
       </div>
       <div className="flex flex-col justify-center px-6 py-10 md:px-12 md:py-16 gap-5">
-        <span className="text-[8px] tracking-[0.4em] uppercase text-accent">✦ Today's Artwork</span>
+        <span className="text-[10px] tracking-[0.4em] uppercase text-accent">✦ Today's Artwork</span>
 
         <h1 className="font-serif text-[42px] font-light leading-tight">
           {line1}
@@ -37,7 +37,7 @@ export default function DailyArtworkCard({ artwork }: Props) {
           )}
         </h1>
 
-        <ul className="text-[9px] leading-relaxed text-muted list-none">
+        <ul className="text-[12px] leading-relaxed text-muted list-none">
           <li>
             {artwork.artistDisplayName} · {artwork.objectDate}
           </li>
@@ -48,7 +48,7 @@ export default function DailyArtworkCard({ artwork }: Props) {
         <div className="flex gap-4 mt-4">
           <button
             type="button"
-            className="px-[22px] py-[10px] text-[8px] tracking-[0.2em] uppercase bg-[var(--color-foreground)] text-[var(--color-background)]"
+            className="px-[22px] py-[10px] text-[10px] tracking-[0.2em] uppercase bg-[var(--color-foreground)] text-[var(--color-background)]"
           >
             Explore Artwork
           </button>

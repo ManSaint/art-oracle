@@ -22,8 +22,8 @@ export default function ArtworkCard({ artwork }: { artwork: ArtworkSummary }) {
         )}
       </div>
       <div className="py-3">
-        <h2 className="font-serif text-sm font-medium">{artwork.title}</h2>
-        <p className="text-[8px] text-muted italic">
+        <h2 className="font-serif text-md font-medium">{artwork.title}</h2>
+        <p className="text-[10px] text-muted italic">
           {artwork.artistDisplayName} · {artwork.objectDate}
         </p>
       </div>

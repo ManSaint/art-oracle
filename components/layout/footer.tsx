@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="flex items-center justify-between px-10 py-6 border-t border-[var(--color-border)] bg-footer">
       <Link
         href="/"
-        className="font-serif text-sm text-muted whitespace-nowrap"
+        className="font-serif text-[20px] text-muted whitespace-nowrap"
       >
         Art Oracle
       </Link>
