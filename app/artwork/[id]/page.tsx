@@ -47,13 +47,15 @@ export default async function ArtworkPage({ params }: Props) {
 
       <div className="bg-stone-100 p-10 overflow-y-auto">
         <ArtworkMetadata artwork={artwork} />
-        <ArtworkGuide
-          title={artwork.title}
-          artistDisplayName={artwork.artistDisplayName}
-          objectDate={artwork.objectDate}
-          medium={artwork.medium}
-          department={artwork.department}
-        />
+        <div className="border-t border-stone-200 mt-8">
+          <ArtworkGuide
+            title={artwork.title}
+            artistDisplayName={artwork.artistDisplayName}
+            objectDate={artwork.objectDate}
+            medium={artwork.medium}
+            department={artwork.department}
+          />
+        </div>
       </div>
     </main>
   );
