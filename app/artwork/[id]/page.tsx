@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getObject } from "@/lib/met-api";
 import ArtworkDetailImage from "@/components/artwork/artworkDetailImage";
 import ArtworkMetadata from "@/components/artwork/artworkMetadata";
+import ArtworkGuide from "./artworkGuide";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -46,6 +47,13 @@ export default async function ArtworkPage({ params }: Props) {
 
       <div className="bg-stone-100 p-10 overflow-y-auto">
         <ArtworkMetadata artwork={artwork} />
+        <ArtworkGuide
+          title={artwork.title}
+          artistDisplayName={artwork.artistDisplayName}
+          objectDate={artwork.objectDate}
+          medium={artwork.medium}
+          department={artwork.department}
+        />
       </div>
     </main>
   );
