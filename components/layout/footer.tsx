@@ -12,7 +12,7 @@ export default function Footer() {
       <ul className="flex gap-5 list-none text-muted footer-links whitespace-nowrap">
         <li>© The Metropolitan Museum of Art</li>
         <li>API: collectionapi.metmuseum.org</li>
-        <li>AI: Grok by xAI</li>
+        <li>AI: Llama via Groq</li>
       </ul>
     </footer>
   );
