@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getObject } from "@/lib/met-api";
+import { ArtworkSummary, getObject } from "@/lib/met-api";
 import ArtworkDetailImage from "@/components/artwork/artworkDetailImage";
 import ArtworkMetadata from "@/components/artwork/artworkMetadata";
 import ArtworkGuide from "./artworkGuide";
+import FavoriteButton from "@/components/artwork/favoriteButton";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -32,6 +33,18 @@ export default async function ArtworkPage({ params }: Props) {
   const artwork = await getObject(numericId);
   if (!artwork) notFound();
 
+  const artworkSummary: ArtworkSummary = {
+    objectID: artwork.objectID,
+    title: artwork.title,
+    artistDisplayName: artwork.artistDisplayName,
+    primaryImageSmall: artwork.primaryImageSmall,
+    objectDate: artwork.objectDate,
+    department: artwork.department,
+    medium: artwork.medium,
+    isHighlight: artwork.isHighlight,
+    isPublicDomain: artwork.isPublicDomain,
+  };
+
   return (
     <main className="min-h-screen grid grid-cols-1 md:grid-cols-2">
       <div className="bg-stone-900 flex flex-col justify-between p-8">
@@ -45,7 +58,10 @@ export default async function ArtworkPage({ params }: Props) {
         <div />
       </div>
 
-      <div className="bg-stone-100 p-10 overflow-y-auto">
+      <div className="bg-stone-100 p-10 overflow-y-auto relative">
+        <div className="absolute top-10 right-10">
+          <FavoriteButton artwork={artworkSummary} />
+        </div>
         <ArtworkMetadata artwork={artwork} />
         <div className="border-t border-stone-200 mt-8">
           <ArtworkGuide
