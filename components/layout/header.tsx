@@ -24,7 +24,7 @@ export default function Header() {
           className="font-serif text-[25px] font-semibold tracking-[0.1em]"
         >
           <span>Art </span>
-          <span className="italic font-light text-accent">Oracle</span>
+          <span className="italic font-light text-(--color-accent)">Oracle</span>
         </Link>
 
         {/* Nav links */}
@@ -44,12 +44,12 @@ export default function Header() {
         </nav>
 
         {/* Search */}
-        <div className="flex items-center border border-[var(--color-border)] px-3 py-1.5 gap-2 w-[160px] text-[12px] text-muted">
-          <span>⌕</span>
+        <div className="flex items-center bg-(--color-surface-dark) border border-(--color-surface-dark) px-3 py-1.5 gap-2 w-[160px]">
+          <span className="text-(--color-border)">⌕</span>
           <input
             type="text"
             placeholder="Search artworks..."
-            className="bg-transparent outline-none w-full text-[10px]"
+            className="bg-transparent outline-none w-full text-[10px] font-bold text-(--color-canvas) placeholder:text-(--color-canvas)"
           />
         </div>
       </div>
