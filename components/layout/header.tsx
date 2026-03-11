@@ -45,7 +45,7 @@ export default function Header() {
 
         {/* Search */}
         <div className="flex items-center bg-(--color-surface-dark) border border-(--color-surface-dark) px-3 py-1.5 gap-2 w-[160px]">
-          <span className="text-(--color-border)">⌕</span>
+          <span className="text-(--color-canvas)">⌕</span>
           <input
             type="text"
             placeholder="Search artworks..."
