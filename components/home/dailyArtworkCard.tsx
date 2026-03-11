@@ -48,7 +48,7 @@ export default function DailyArtworkCard({ artwork }: Props) {
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 min-h-[500px] border-b border-[var(--color-border)]">
-      <div className="relative h-[350px] md:h-full bg-[var(--color-hero-img-bg)] p-4">
+      <div className="relative h-[350px] md:h-full bg-[var(--color-surface-dark)] p-4">
         {artwork.primaryImage ? (
           <Image
             src={artwork.primaryImage}
