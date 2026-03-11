@@ -11,14 +11,17 @@ const MEDIA = [
 
 export default function BrowseByMedium() {
   return (
-    <section>
+    // bg-(--color-surface-dark) swaps the whole section to the dark brown
+    <section className="bg-(--color-surface-dark)">
       <div className="px-10 max-w-7xl mx-auto">
-        <div className="py-16 border-t border-(--color-border)">
+        <div className="py-16">
           <div className="flex items-baseline justify-between mb-8">
-            <h2 className="font-serif text-3xl font-light">Explore by Medium</h2>
+            {/* text-(--color-canvas) is the warm off-white — readable on dark */}
+            <h2 className="font-serif text-3xl font-light text-(--color-canvas)">Explore by Medium</h2>
+            {/* accent colour stays the same — it works on both light and dark */}
             <Link
               href="/search"
-              className="text-[12px] tracking-widest uppercase text-muted hover:text-foreground transition-colors"
+              className="text-[12px] tracking-widest uppercase text-(--color-accent) hover:text-(--color-canvas) transition-colors"
             >
               All works →
             </Link>
@@ -28,7 +31,9 @@ export default function BrowseByMedium() {
               <Link
                 key={medium.label}
                 href={medium.href}
-                className="border border-(--color-border) px-4 py-5 text-center text-[18px] font-serif hover:bg-(--color-border) transition-colors"
+                // border uses canvas at 30% opacity — soft on the dark bg
+                // hover fills with canvas at 10% — subtle highlight
+                className="border border-(--color-canvas)/30 px-4 py-5 text-center text-[18px] font-serif text-(--color-canvas) hover:bg-(--color-canvas)/10 transition-colors"
               >
                 {medium.label}
               </Link>
