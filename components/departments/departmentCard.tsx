@@ -9,7 +9,7 @@ export default function DepartmentCard({ department }: Props) {
   return (
     <Link
       href={`/departments/${department.departmentId}`}
-      className="border border-(--color-border) px-4 py-5 text-center font-serif hover:bg-(--color-border) transition-colors"
+      className="border border-(--color-border) px-4 py-5 text-center text-lg font-serif font-bold text-(--color-foreground) hover:bg-(--color-foreground) hover:text-(--color-background) hover:border-(--color-foreground) transition-colors"
     >
       {department.displayName}
     </Link>

@@ -28,7 +28,7 @@ export default function BrowseByMedium() {
               <Link
                 key={medium.label}
                 href={medium.href}
-                className="border border-(--color-canvas)/30 px-4 py-5 text-center text-[18px] font-serif text-(--color-canvas) hover:bg-(--color-canvas)/10 transition-colors"
+                className="border border-(--color-canvas)/30 px-4 py-5 text-center text-[18px] font-serif text-(--color-canvas) hover:bg-(--color-canvas) hover:text-(--color-foreground) transition-colors"
               >
                 {medium.label}
               </Link>
