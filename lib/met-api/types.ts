@@ -1,3 +1,5 @@
+// Subject keyword tags — null if no tags, otherwise an array of MetTag objects.
+// We don't display these in the app, but the API sends them so we type them.
 export interface MetTag {
   term: string;
   AAT_URL: string;

@@ -11,27 +11,29 @@ const MEDIA = [
 
 export default function BrowseByMedium() {
   return (
-    <section className="border-t border-(--color-border)">
-      <div className="py-16 px-10 max-w-7xl mx-auto">
-        <div className="flex items-baseline justify-between mb-8">
-          <h2 className="font-serif text-3xl font-light">Explore by Medium</h2>
-          <Link
-            href="/search"
-            className="text-[12px] tracking-widest uppercase text-muted hover:text-foreground transition-colors"
-          >
-            All works →
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          {MEDIA.map((medium) => (
+    <section>
+      <div className="px-10 max-w-7xl mx-auto">
+        <div className="py-16 border-t border-(--color-border)">
+          <div className="flex items-baseline justify-between mb-8">
+            <h2 className="font-serif text-3xl font-light">Explore by Medium</h2>
             <Link
-              key={medium.label}
-              href={medium.href}
-              className="border border-(--color-border) px-4 py-5 text-center text-[18px] font-serif hover:bg-(--color-border) transition-colors"
+              href="/search"
+              className="text-[12px] tracking-widest uppercase text-muted hover:text-foreground transition-colors"
             >
-              {medium.label}
+              All works →
             </Link>
-          ))}
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {MEDIA.map((medium) => (
+              <Link
+                key={medium.label}
+                href={medium.href}
+                className="border border-(--color-border) px-4 py-5 text-center text-[18px] font-serif hover:bg-(--color-border) transition-colors"
+              >
+                {medium.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

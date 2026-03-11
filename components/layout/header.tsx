@@ -11,6 +11,8 @@ const navLinks = [
 ];
 
 export default function Header() {
+  // usePathname() returns the current URL path, e.g. "/departments"
+  // Re-runs automatically whenever the user navigates to a new page
   const pathname = usePathname();
 
   return (

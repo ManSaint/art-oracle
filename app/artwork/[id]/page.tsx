@@ -46,7 +46,7 @@ export default async function ArtworkPage({ params }: Props) {
   };
 
   return (
-    <main className="min-h-screen grid grid-cols-1 md:grid-cols-2">
+    <main className="flex-1 grid grid-cols-1 md:grid-cols-2">
       <div className="bg-stone-900 flex flex-col justify-between p-8">
         <Link
           href="/"

@@ -1,4 +1,3 @@
-// app/search/page.tsx
 import { searchArtworks, fetchPage } from "@/lib/met-api";
 import SearchBar from "@/components/search/searchBar";
 import SearchResultsClient from "@/components/search/searchResultsClient";
@@ -14,7 +13,7 @@ export default async function SearchPage({ searchParams }: Props) {
     return (
       <main>
         <SearchBar />
-        <div className="py-16 text-center text-sm text-muted">Enter a search term to find artworks.</div>
+        <div className="py-16 text-center text-sm text-muted">Make a search to find artworks.</div>
       </main>
     );
   }

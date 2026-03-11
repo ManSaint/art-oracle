@@ -3,6 +3,8 @@ import { DEV_LIMIT } from "./config";
 import { getObject } from "./objects";
 import { ArtworkSummary, MetObject, PaginatedResult } from "./types";
 
+// Converts a full MetObject (50 fields) into a lean ArtworkSummary (9 fields).
+// Used to trim data before passing to card components.
 function toArtworkSummary(obj: MetObject): ArtworkSummary {
   return {
     objectID: obj.objectID,

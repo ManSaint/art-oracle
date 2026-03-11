@@ -29,7 +29,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${cormorant.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
         <Header />
-        <div className="flex-1">{children}</div>
+        {/* Takes upp all space between Header and Footer so Footer doesnt float up */}
+        <div className="flex-1 flex flex-col">{children}</div>
         <Footer />
       </body>
     </html>

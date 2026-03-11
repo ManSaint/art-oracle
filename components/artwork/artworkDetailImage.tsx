@@ -9,7 +9,7 @@ export default function ArtworkDetailImage({ artwork }: Props) {
   return (
     <div className="flex items-center justify-center h-full">
       {artwork.primaryImage && artwork.isPublicDomain ? (
-        <div className="relative w-full h-[500px]">
+        <div className="relative w-full h-[80vh]">
           <Image
             src={artwork.primaryImageSmall}
             alt={artwork.title}
