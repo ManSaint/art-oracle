@@ -24,7 +24,7 @@ Art Oracle lets you explore over 470,000 artworks from the Metropolitan Museum o
 
 ## ✨ Features
 
-- **Browse artworks** — Explore the Met's 17 departments and 470,000+ works
+- **Browse artworks** — Explore the Met's 19 departments and 470,000+ works
 - **Daily artwork** — A new artwork is highlighted on the homepage every day
 - **AI descriptions** — Llama (via Groq) generates a rich, engaging text about each artwork
 - **Voice narration** — ElevenLabs reads the description aloud in a deep British voice
