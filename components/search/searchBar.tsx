@@ -24,7 +24,7 @@ export default function SearchBar({ defaultValue }: Props) {
             />
             <button
               type="submit"
-              className="px-8 py-3 text-[9px] tracking-widest uppercase border border-(--color-border) text-(--color-accent) hover:bg-(--color-accent)/10 transition-colors"
+              className="px-8 py-3 text-[9px] tracking-widest uppercase border border-(--color-border) text-(--color-accent) hover:bg-(--color-accent)/10 transition-colors cursor-pointer"
             >
               Search
             </button>
