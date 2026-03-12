@@ -10,9 +10,36 @@ export default function Footer() {
         Art Oracle
       </Link>
       <ul className="flex gap-5 list-none text-muted footer-links whitespace-nowrap">
-        <li>© The Metropolitan Museum of Art</li>
-        <li>API: collectionapi.metmuseum.org</li>
-        <li>AI: Llama via Groq</li>
+        <li>
+          <a
+            href="https://www.metmuseum.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-(--color-foreground) transition-colors"
+          >
+            © The Metropolitan Museum of Art
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://metmuseum.github.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-(--color-foreground) transition-colors"
+          >
+            API: collectionapi.metmuseum.org
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://groq.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-(--color-foreground) transition-colors"
+          >
+            AI: Llama via Groq
+          </a>
+        </li>
       </ul>
     </footer>
   );
