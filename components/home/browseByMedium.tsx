@@ -17,7 +17,7 @@ export default function BrowseByMedium() {
           <div className="flex items-baseline justify-between mb-8">
             <h2 className="font-serif text-3xl font-light text-(--color-canvas)">Explore by Medium</h2>
             <Link
-              href="/search"
+              href="/search?q=art"
               className="text-[12px] tracking-widest uppercase text-(--color-accent) hover:text-(--color-canvas) transition-colors"
             >
               All works →
