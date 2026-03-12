@@ -6,7 +6,10 @@ import BrowseByMedium from "@/components/home/browseByMedium";
 export default async function Home() {
   const dailyArtwork = await getDailyArtwork();
   const search = await searchArtworks({ query: "", hasImages: true, isHighlight: true });
-  const featured = await fetchPage(search.objectIDs ?? [], 1, 8);
+  const totalIds = search.objectIDs ?? [];
+  const totalPages = Math.ceil(totalIds.length / 8);
+  const randomPage = Math.floor(Math.random() * totalPages) + 1;
+  const featured = await fetchPage(totalIds, randomPage, 8);
   const artworks = featured.items.filter((a) => a.primaryImageSmall !== "");
 
   return (

@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/explore", label: "Explore" },
   { href: "/departments", label: "Departments" },
   { href: "/favorites", label: "Favorites" },
 ];
@@ -44,14 +43,19 @@ export default function Header() {
         </nav>
 
         {/* Search */}
-        <div className="flex items-center bg-(--color-surface-dark) border border-(--color-surface-dark) px-3 py-1.5 gap-2 w-[160px]">
+        <form
+          method="GET"
+          action="/search"
+          className="flex items-center bg-(--color-surface-dark) border border-(--color-surface-dark) px-3 py-1.5 gap-2 w-[160px]"
+        >
           <span className="text-(--color-canvas)">⌕</span>
           <input
             type="text"
+            name="q"
             placeholder="Search artworks..."
             className="bg-transparent outline-none w-full text-[10px] font-bold text-(--color-canvas) placeholder:text-(--color-canvas)"
           />
-        </div>
+        </form>
       </div>
     </header>
   );

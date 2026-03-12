@@ -1,5 +1,4 @@
 import { batchFetch } from "./client";
-import { DEV_LIMIT } from "./config";
 import { getObject } from "./objects";
 import { ArtworkSummary, MetObject, PaginatedResult } from "./types";
 
@@ -30,14 +29,13 @@ function paginateIds(ids: number[], page: number, pageSize: number) {
 // .filter() removes the nulls, but TypeScript doesn't realise that automatically.
 // The "r is MetObject" part tells TypeScript: trust me, there are no nulls left.
 export async function fetchPage(ids: number[], page: number, pageSize = 10): Promise<PaginatedResult<ArtworkSummary>> {
-  const safeIds = ids.slice(0, DEV_LIMIT);
-  const { pageIds, totalPages } = paginateIds(safeIds, page, pageSize);
+  const { pageIds, totalPages } = paginateIds(ids, page, pageSize);
   const results = await batchFetch(pageIds, getObject);
   const items = results.filter((r): r is MetObject => r !== null).map(toArtworkSummary);
 
   return {
     items,
-    totalItems: safeIds.length,
+    totalItems: ids.length,
     totalPages,
     currentPage: page,
     pageSize,
@@ -47,14 +45,13 @@ export async function fetchPage(ids: number[], page: number, pageSize = 10): Pro
 }
 
 export async function fetchFullPage(ids: number[], page: number, pageSize = 10): Promise<PaginatedResult<MetObject>> {
-  const safeIds = ids.slice(0, DEV_LIMIT);
-  const { pageIds, totalPages } = paginateIds(safeIds, page, pageSize);
+  const { pageIds, totalPages } = paginateIds(ids, page, pageSize);
   const results = await batchFetch(pageIds, getObject);
   const items = results.filter((r): r is MetObject => r !== null);
 
   return {
     items,
-    totalItems: safeIds.length,
+    totalItems: ids.length,
     totalPages,
     currentPage: page,
     pageSize,
