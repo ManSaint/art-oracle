@@ -49,8 +49,18 @@ function buildPrompt(fields: {
     ".",
     medium ? ` Medium: ${medium}.` : "",
     department ? ` Department: ${department}.` : "",
-    " Address a curious visitor who wants to understand the work's significance and context.",
+    " Address a curious visitor who wants to understand the work's significance and context. Write in plain prose. Do not use markdown, asterisks, headings or bullet points.",
   ].join("");
+}
+
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/__(.+?)__/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/_(.+?)_/g, "$1")
+    .replace(/`(.+?)`/g, "$1")
+    .replace(/^#{1,6}\s+/gm, "");
 }
 
 export async function POST(request: Request) {
@@ -147,7 +157,8 @@ export async function POST(request: Request) {
 
   const data = await response.json();
   const choice = data?.choices?.[0];
-  const description: string = choice?.message?.content?.trim() ?? "";
+  const raw: string = choice?.message?.content ?? "";
+  const description = stripMarkdown(raw).trim();
 
   if (choice?.finish_reason === "length") {
     console.warn(
