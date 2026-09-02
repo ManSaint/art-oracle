@@ -26,7 +26,7 @@ Art Oracle lets you explore over 470,000 artworks from the Metropolitan Museum o
 
 - **Browse artworks** — Explore the Met's 19 departments and 470,000+ works
 - **Daily artwork** — A new artwork is highlighted on the homepage every day
-- **AI descriptions** — Llama (via Groq) generates a rich, engaging text about each artwork
+- **AI descriptions** — An LLM served by Groq generates a rich, engaging text about each artwork
 - **Voice narration** — ElevenLabs reads the description aloud in a deep British voice
 - **Search & filter** — Search by artist, title, era or culture
 - **Favorites** — Save your favourite artworks locally in the browser
@@ -43,7 +43,7 @@ Art Oracle lets you explore over 470,000 artworks from the Metropolitan Museum o
 | Tailwind CSS v4         | Styling                               |
 | Bun                     | Package manager                       |
 | Met Museum API          | Artwork data (free, no key required)  |
-| Groq API (Llama)        | AI-generated descriptions             |
+| Groq API (GPT-OSS)      | AI-generated descriptions             |
 | ElevenLabs              | Text-to-speech narration              |
 
 ---
@@ -70,6 +70,7 @@ Create a `.env.local` file in the project root:
 
 ```bash
 GROQ_API_KEY=your_groq_key_here
+GROQ_MODEL=openai/gpt-oss-20b                      # Optional, this is the default
 ELEVENLABS_API_KEY=your_elevenlabs_key_here        # Optional
 ELEVENLABS_VOICE_ID=JBFqnCBsd6RMkjVDRZzb           # George (default)
 ```
@@ -97,7 +98,7 @@ art-oracle/
 │   ├── departments/[id]/page.tsx   # Department page
 │   ├── favorites/page.tsx          # Favorites page
 │   └── api/
-│       ├── groq/route.ts           # Proxy for Groq/Llama API
+│       ├── groq/route.ts           # Proxy for the Groq API
 │       └── tts/route.ts            # Proxy for ElevenLabs
 ├── components/                     # Reusable components
 ├── lib/                            # Utilities, API clients
@@ -117,13 +118,23 @@ GET https://collectionapi.metmuseum.org/public/collection/v1/objects/[id]
 GET https://collectionapi.metmuseum.org/public/collection/v1/departments
 ```
 
-**Groq API (Llama)**
+**Groq API (GPT-OSS)**
 Called via `/api/groq` to keep the key off the client.
+The model is set with `GROQ_MODEL` and defaults to `openai/gpt-oss-20b`.
+Groq retires models regularly — see their deprecations page before changing it.
 
 **ElevenLabs TTS**
-Called via `/api/tts`. Falls back to the Web Speech API if no key is provided.
+Called via `/api/tts`.
 
 ---
+
+## ⚠️ Known Limitations
+
+- No rate limiting on `/api/groq` — the endpoint is open to repeated calls
+- No caching of generated descriptions — the same artwork is regenerated on every request
+- No automated tests
+
+--- 
 
 ## 🎨 Design Wireframe
 
