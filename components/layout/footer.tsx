@@ -37,7 +37,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="hover:text-(--color-foreground) transition-colors"
           >
-            AI: Llama via Groq
+            AI: GPT-OSS via Groq
           </a>
         </li>
       </ul>
