@@ -7,6 +7,10 @@ const DEFAULT_MODEL = "openai/gpt-oss-20b";
 const FIELD_MAX_LENGTH = 300;
 const REQUEST_TIMEOUT_MS = 20_000;
 
+const MAX_COMPLETION_TOKENS = 1200;
+
+const RETRY_DELAY_MS = 800;
+
 type ErrorCode =
   | "not_configured"
   | "bad_request"
@@ -14,7 +18,12 @@ type ErrorCode =
   | "rate_limited"
   | "model_unavailable"
   | "upstream_unreachable"
+  | "upstream_busy"
   | "upstream_error";
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function fail(code: ErrorCode, message: string, status: number) {
   return NextResponse.json({ error: message, code }, { status });
@@ -76,10 +85,8 @@ export async function POST(request: Request) {
     department: clamp(fields.department),
   });
 
-  let response: Response;
-
-  try {
-    response = await fetch(GROQ_ENDPOINT, {
+  function callGroq() {
+    return fetch(GROQ_ENDPOINT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,10 +95,25 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         model,
         messages: [{ role: "user", content: prompt }],
-        max_tokens: 400,
+        max_completion_tokens: MAX_COMPLETION_TOKENS,
+        reasoning_effort: "low",
+        reasoning_format: "hidden",
+        temperature: 0.6,
       }),
       signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });
+  }
+
+  let response: Response;
+
+  try {
+    response = await callGroq();
+
+    if (response.status === 503 || response.status === 500) {
+      console.warn(`[api/groq] Groq responded ${response.status}, retrying once`);
+      await sleep(RETRY_DELAY_MS);
+      response = await callGroq();
+    }
   } catch (error) {
     console.error("[api/groq] could not reach Groq:", error);
     return fail("upstream_unreachable", "The AI service is unavailable right now.", 504);
@@ -109,6 +131,10 @@ export async function POST(request: Request) {
       return fail("rate_limited", "Too many requests. Please try again in a moment.", 429);
     }
 
+    if (response.status === 503 || response.status === 500) {
+      return fail("upstream_busy", "The AI service is busy. Please try again in a moment.", 503);
+    }
+
     if (detail.includes("model_decommissioned") || detail.includes("model_not_found")) {
       console.error(
         `[api/groq] model "${model}" is no longer served. Set GROQ_MODEL to a current model — see https://console.groq.com/docs/deprecations`,
@@ -120,7 +146,14 @@ export async function POST(request: Request) {
   }
 
   const data = await response.json();
-  const description: string = data?.choices?.[0]?.message?.content?.trim() ?? "";
+  const choice = data?.choices?.[0];
+  const description: string = choice?.message?.content?.trim() ?? "";
+
+  if (choice?.finish_reason === "length") {
+    console.warn(
+      `[api/groq] response truncated at ${MAX_COMPLETION_TOKENS} tokens for "${title}" — consider raising MAX_COMPLETION_TOKENS`,
+    );
+  }
 
   if (!description) {
     console.error("[api/groq] Groq returned a response with no content:", JSON.stringify(data).slice(0, 500));
